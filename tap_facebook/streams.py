@@ -91,8 +91,13 @@ class AdsInsightStream(FacebookStream):
             "conversions"
         ]
 
+        breakdowns = [
+            "country",
+            "region"
+        ]
+
         #timerange = f"timerange={{'since':'2023-04-10', 'until':'2023-04-11'}}"
-        return f"/insights?level=campaign&filtering=[{{field:'ad.impressions',operator:'GREATER_THAN',value:0}}]&fields={columns}&breakdowns=country"
+        return f"/insights?level=campaign&filtering=[{{field:'ad.impressions',operator:'GREATER_THAN',value:0}}]&fields={columns}&breakdowns={breakdowns}"
 
 
     replication_keys = ["date_start"]
@@ -109,6 +114,7 @@ class AdsInsightStream(FacebookStream):
         Property("impressions", StringType),
         Property("clicks", StringType),
         Property("country", StringType),
+        Property("region", StringType),
         Property(
             "conversions",
             ArrayType(
